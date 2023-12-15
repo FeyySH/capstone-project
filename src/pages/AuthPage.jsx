@@ -10,7 +10,7 @@ export default function AuthPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser, login, logout } = useContext(AuthContext);
 
     useEffect(() => {
         if (currentUser) {
@@ -23,23 +23,39 @@ export default function AuthPage() {
 
     const handleSignUp = async (e) => {
         e.preventDefault();
-        // Your logic for handling signup
-        console.log("Hardcoded registration with username:", username);
-        console.log("Hardcoded registration with password:", password);
-        // You might want to set some state or perform other actions
+        console.log("Handle sign up logic here");
         handleClose();
     };
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        // Your logic for handling login
-        console.log("Hardcoded login with username:", username);
-        console.log("Hardcoded login with password:", password);
-        // You might want to set some state or perform other actions
-        handleClose();
+        try {
+            // Call your authentication API to obtain a token
+            const response = await fetch("/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                const { token } = await response.json();
+                login(token);
+                handleClose();
+            } else {
+                console.error("Login failed");
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+        }
     };
 
     const handleClose = () => setModalShow(null);
+
+    const handleLogout = () => {
+        logout();
+    };
 
     return (
         <Row>
@@ -47,7 +63,6 @@ export default function AuthPage() {
                 <Image src={loginImage} fluid />
             </Col>
             <Col sm={6} className="p-4">
-                {/* ... (your existing JSX code) */}
                 <Modal show={modalShow !== null} onHide={handleClose} animation={false} centered>
                     <Modal.Body>
                         <h2 className="mb-4" style={{ fontWeight: "bold " }}>
@@ -82,14 +97,18 @@ export default function AuthPage() {
                     </Modal.Body>
                 </Modal>
                 <Col sm={5} className="d-grid gap-2">
-                    {/* ... (your existing buttons) */}
                     <Button className="rounded-pill" onClick={handleShowSignUp}>
                         Create an account
                     </Button>
-                    {/* ... (other buttons) */}
-                    <Button className="rounded-pill" variant="outline-primary" onClick={handleShowLogin}>
-                        Sign In
-                    </Button>
+                    {currentUser ? (
+                        <Button className="rounded-pill" onClick={handleLogout}>
+                            Logout
+                        </Button>
+                    ) : (
+                        <Button className="rounded-pill" variant="outline-primary" onClick={handleShowLogin}>
+                            Sign In
+                        </Button>
+                    )}
                 </Col>
             </Col>
         </Row>
