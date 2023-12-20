@@ -1,24 +1,37 @@
-import { Navbar, Nav } from 'react-bootstrap';
+import { useContext, useEffect } from "react";
+import { Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import ProfileSideBar from "../components/ProfileSideBar";
+import ProfileMidBody from "../components/ProfileMidBody";
+import { AuthContext } from "../components/AuthProvider";
+import { getAuth } from "firebase/auth";
 
-const HomePage = () => {
+
+export default function ProfilePage() {
+    const auth = getAuth()
+    const navigate = useNavigate();
+    const { currentUser } = useContext(AuthContext);
+
+
+
+    useEffect(() => {
+        if (!currentUser) {
+            navigate("/login");
+        }
+    }, [currentUser, navigate]);
+
+    const handleLogout = () => {
+        auth.signOut();
+    }
+
     return (
-        <div>
-            <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">FeyyFit</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ml-auto">
-                        <Nav.Link href="#profile">Profile</Nav.Link>
-                        <Nav.Link href="#settings">Settings</Nav.Link>
-                        <Nav.Link href="#logout">Logout</Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-            <div className="container mt-3">
-                <h2 className="text-center">Welcome to FeyyFit!</h2>
-            </div>
-        </div>
+        <>
+            <Container>
+                <Row>
+                    <ProfileSideBar handleLogout={handleLogout} />
+                    <ProfileMidBody />
+                </Row>
+            </Container>
+        </>
     );
-};
-
-export default HomePage;
+}
