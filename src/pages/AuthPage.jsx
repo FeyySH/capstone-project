@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/AuthProvider";
 
 export default function AuthPage() {
-    const loginImage = "https://sig1.co/img-twitter-1";
+    const loginImage = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-vector%2Ftaekwondo-logo-template-martial-arts-badge_28771177.htm&psig=AOvVaw36UzzDOdkQXLOysdy4SGz2&ust=1703147354599000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLirrLvMnYMDFQAAAAAdAAAAABAD";
 
     const [modalShow, setModalShow] = useState(null);
     const handleShowSignUp = () => setModalShow("SignUp");
@@ -69,10 +69,8 @@ export default function AuthPage() {
                 <Image src={loginImage} fluid />
             </Col>
             <Col sm={6} className="p-4">
-                <i className="bi bi-twitter" style={{ fontSize: 50, color: "dodgerblue" }}></i>
 
-                <p className="mt-5" style={{ fontSize: 64 }}>happening now</p>
-                <h2 className="my-5" style={{ fontSize: 31 }}>Join Twitter Today</h2>
+                <p className="mt-5" style={{ fontSize: 64 }}>Feyy Taek</p>
 
                 <Col sm={5} className="d-grid gap-2">
                     <Button className="rounded-pill" variant="outline-dark">
