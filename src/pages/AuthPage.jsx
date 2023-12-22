@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/AuthProvider";
 
 export default function AuthPage() {
-    const loginImage = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-vector%2Ftaekwondo-logo-template-martial-arts-badge_28771177.htm&psig=AOvVaw36UzzDOdkQXLOysdy4SGz2&ust=1703147354599000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLirrLvMnYMDFQAAAAAdAAAAABAD";
+    const loginImage = "https://th.bing.com/th/id/R.bc5ae15a6c08f2e1d85f524070950d74?rik=kZIcQ9hN2frMfQ&riu=http%3a%2f%2f3.bp.blogspot.com%2f-tbFY_gQmHlQ%2fTfccm-24w-I%2fAAAAAAAAAO0%2fxgHFzHQG-jg%2fs1600%2fBeltHierarchy.gif.png&ehk=QdQskvcswOf3sO%2b40rtOq3JWIBPjynL5VrqJBOHTFew%3d&risl=&pid=ImgRaw&r=0";
 
     const [modalShow, setModalShow] = useState(null);
     const handleShowSignUp = () => setModalShow("SignUp");
@@ -70,7 +70,7 @@ export default function AuthPage() {
             </Col>
             <Col sm={6} className="p-4">
 
-                <p className="mt-5" style={{ fontSize: 64 }}>Feyy Taek</p>
+                <p className="mt-5" color="danger" style={{ fontSize: 64 }}>Feyy Taek</p>
 
                 <Col sm={5} className="d-grid gap-2">
                     <Button className="rounded-pill" variant="outline-dark">
@@ -116,7 +116,7 @@ export default function AuthPage() {
                                 <Form.Control
                                     type="password"
                                     placeholder="Enter password"
-                                    onChange={(e) => setPassword(e.target.value)} // Update the password state
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </Form.Group>
                             <p style={{ fontSize: "12px" }}>
